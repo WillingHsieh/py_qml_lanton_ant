@@ -26,11 +26,14 @@ https://zh.wikipedia.org/zh-tw/%E5%85%B0%E9%A1%BF%E8%9A%82%E8%9A%81
         。單部執行
         。加速/減速運行速度
         。螞蟻移動時有動畫效果
+        。地圖上下左右平移功能
 
-![img.png](img.png)
+![img_1.png](img_1.png)
 
 目前測試通過的平台
 
     * Mac OSX 14 + Python 3.11.6 
 
     * Windows 11 + Python 3.11.6
+
+    * Ubuntu 22 + Python 3.10.12

@@ -36,7 +36,7 @@ Window {
     width:  _cols * _len + 230
 
     visible: true
-    title: qsTr( "兰顿蚂蚁: " + _rows + "X" + _cols)
+    title: qsTr( "蘭頓螞蟻: " + _rows + "X" + _cols)
 
     Row {
 
@@ -81,15 +81,23 @@ Window {
             topPadding: 10
 
             Row {
-                TextField {
-                    id: txt_random_percent
-                    font.pixelSize: 12
-                    height: 15
+                Rectangle {
+                    height: 20
                     width: 30
-                    text: "30"
+                    border.color: "blue"
+                    anchors.verticalCenter: parent.verticalCenter
+                    TextField {
+                        id: txt_random_percent
+
+                        font.pixelSize: 12
+                        anchors.fill: parent
+                        text: "30"
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
                 }
                 Text {
                     text: qsTr(" %")
+                    anchors.verticalCenter: parent.verticalCenter
                 }
 
                 Button {
