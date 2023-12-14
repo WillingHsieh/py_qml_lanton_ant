@@ -287,6 +287,42 @@ Window {
                 }
             }
 
+            Row {
+                leftPadding: 32
+                Button {
+                    text: qsTr("上移")
+                    onClicked: {
+                        cells.shift_up()
+                    }
+                }
+            }
+
+            Row {
+                Button {
+                    text: qsTr("左移")
+                    onClicked: {
+                        cells.shift_left()
+                    }
+                }
+
+                Button {
+                    text: qsTr("右移")
+                    onClicked: {
+                        cells.shift_right()
+                    }
+                }
+            }
+
+            Row {
+                leftPadding: 32
+                Button {
+                    text: qsTr("下移")
+                    onClicked: {
+                        cells.shift_down()
+                    }
+                }
+            }
+
         }
     }
 

@@ -19,6 +19,10 @@ class Cells(QObject):
         self.__cols = 11
         self.__len = 59
 
+        self.__rows = 51
+        self.__cols = 51
+        self.__len = 20
+
         # self.__rows = 111
         # self.__cols = 111
         # self.__len = 9
@@ -26,8 +30,9 @@ class Cells(QObject):
         # 格子總數
         self.__count = self.__rows * self.__cols
 
-        # 初始化 data
+        # 初始化 data/data_next
         self.__data = [ False for i in range( self.__count)]
+        self.__data_next = [ False for i in range( self.__count)]
 
         # 初始化 鄰居查表
         self.__data_nbs = []
@@ -42,6 +47,19 @@ class Cells(QObject):
         # 螞蟻
         self.ant = Ant( self)
         print( "init...end")
+
+    # ==== 計算結果的緩存 ====
+
+    __data_next = []
+    def data_next_clear(self):
+        for idx in range( self.__count):
+            self.__data_next[ idx] = False
+
+    # data_next 回存到 data
+    def restore_data(self):
+        for idx in range( self.__count):
+            val = self.__data_next[ idx]
+            self.set_data( idx, val)
 
     # ==== 座標換算/查表 ====
 
@@ -214,6 +232,38 @@ class Cells(QObject):
     @Slot()
     def speed_down(self):
         self.ant.speed_down()
+
+    # ==== 平移 ====
+
+    def shift_way(self, way):
+
+        # 計算結果存放到 __data_next
+        self.data_next_clear()
+        for i in range( self.__count):
+            if self.__data[ i]:
+                idx_next = self.__data_nbs[ i][ way]
+                self.__data_next[ idx_next] = True
+        self.restore_data()
+
+    @Slot()
+    def shift_up(self):
+        self.shift_way(Ways.up)
+        self.ant.move_up()
+
+    @Slot()
+    def shift_down(self):
+        self.shift_way( Ways.down)
+        self.ant.move_down()
+
+    @Slot()
+    def shift_left(self):
+        self.shift_way(Ways.left)
+        self.ant.move_left()
+
+    @Slot()
+    def shift_right(self):
+        self.shift_way( Ways.right)
+        self.ant.move_right()
 
 if __name__ == "__main__":
     app = QGuiApplication(sys.argv)
